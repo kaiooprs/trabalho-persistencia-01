@@ -1,4 +1,6 @@
 Kaio Pereira: criação do repositório, 
 
+Priscila Holanda: 
+
 Vitoria Rabelo Santiago - 566462: 
-configurações de ambiente (venv, estrutura do projeto), 
+configurações de ambiente (venv, estrutura do projeto, requirements), segurança JWT, controle de ID's das entidades, 
