@@ -19,35 +19,48 @@ O projeto utiliza **Delta Lake (com PyArrow)** para persistência de dados em di
 
 ## 📂 Estrutura do projeto
 finance-api/
-├─ app/
-│ ├─ main.py # Inicialização do FastAPI
-│ ├─ config.py # Variáveis de ambiente e paths
-│ ├─ security.py # JWT e autenticação
-│ ├─ db/
-│ │ ├─ seq.py # Controle de IDs automáticos
-│ │ └─ delta_mini_db.py # Mini-DB baseado em Delta Lake
-│ ├─ models/
-│ │ ├─ transaction.py # Entidade principal (TP)
-│ │ ├─ user.py # Usuário e autenticação
-│ │ ├─ account.py # Contas associadas
-│ │ └─ category.py # Categorias de transações
-│ ├─ routers/
-│ │ ├─ transactions.py # Rotas CRUD de transações
-│ │ ├─ users.py # Login e cadastro de usuários
-│ │ ├─ accounts.py # CRUD de contas
-│ │ └─ categories.py # CRUD de categorias
-│ └─ utils/
-│ └─ hashing.py # Funções auxiliares de hash
-├─ data/
-│ ├─ delta/ # Armazenamento Delta Lake
-│ └─ seq/ # Contadores de IDs (.seq)
-├─ scripts/
-│ └─ seed.py # Gera dados de teste
-├─ tests/
-│ └─ test_smoke.py # Testes iniciais
-├─ .env.example # Exemplo de variáveis de ambiente
-├─ requirements.txt # Dependências do projeto
-└─ README.md
+├── app/
+│   ├── __init__.py
+│   ├── main.py
+│   ├── config.py
+│   ├── security.py
+│   ├── db/
+│   │   ├── __init__.py
+│   │   ├── seq.py
+│   │   └── delta_mini_db.py
+│   ├── models/
+│   │   ├── __init__.py
+│   │   ├── user.py
+│   │   ├── account.py
+│   │   ├── category.py
+│   │   └── transaction.py
+│   ├── routers/
+│   │   ├── __init__.py
+│   │   ├── health.py
+│   │   ├── users.py
+│   │   ├── accounts.py
+│   │   ├── categories.py
+│   │   └── transactions.py
+│   └── utils/
+│       └── hashing.py
+├── data/
+│   ├── delta/
+│   │   ├── users/
+│   │   ├── accounts/
+│   │   ├── categories/
+│   │   └── transactions/
+│   └── seq/
+│       ├── users.seq
+│       ├── accounts.seq
+│       ├── categories.seq
+│       └── transactions.seq
+├── scripts/
+│   └── seed.py
+├── tests/
+│   └── test_smoke.py
+├── .env.example
+├── requirements.txt
+└── README.md
 
 ---
 
