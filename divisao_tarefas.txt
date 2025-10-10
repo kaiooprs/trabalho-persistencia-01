@@ -1,0 +1,4 @@
+Kaio Pereira: criação do repositório, 
+
+Vitoria Rabelo Santiago - 566462: 
+configurações de ambiente (venv, estrutura do projeto), 
