@@ -33,3 +33,6 @@ class UserDB(BaseModel):
     email: EmailStr
     password_hash: str
     created_at: str
+
+def now_iso() -> str:
+    return datetime.utcnow().isoformat()
