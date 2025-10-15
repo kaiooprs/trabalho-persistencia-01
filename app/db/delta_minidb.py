@@ -8,6 +8,7 @@ from deltalake import DeltaTable, write_deltalake
 
 from app.config import settings
 from app.db.seq import next_id
+from app.models.transaction import transaction_schema
 
 class DeltaMiniDB:
     """
@@ -22,15 +23,25 @@ class DeltaMiniDB:
         self.partition_by = partition_by or []
         self.table_path = Path(settings.DATA) / "delta" / entity
         self.table_path.mkdir(parents=True, exist_ok=True)
-        self._ensure_table()
+        #self._ensure_table()
 
-    def _ensure_table(self):
-        # cria tabela vazia se não existir
+    def create_table_if_not_exists(self):
+        """
+        Cria a estrutura da tabela Delta (metadados) se ela não existir.
+        Usa DeltaTable.create() que é o método ideal para inicialização.
+        """
         if not (self.table_path / "_delta_log").exists():
-            empty_cols = [pa.array([], type=f.type) for f in self.schema]
-            empty = pa.Table.from_arrays(empty_cols, schema=self.schema)
-            write_deltalake(str(self.table_path), empty, mode="overwrite", partition_by=self.partition_by)
-
+            try:
+                DeltaTable.create(
+                    table_uri=str(self.table_path),
+                    schema=self.schema,
+                    partition_by=self.partition_by,
+                )
+                print(f"Delta table created successfully at: {self.table_path}")
+            except Exception as e:
+                print(f"Failed to create Delta table: {e}")
+                raise e
+    
     def _dt(self) -> DeltaTable:
         return DeltaTable(str(self.table_path))
 
@@ -100,3 +111,6 @@ class DeltaMiniDB:
         deleted = self._dt().vacuum(retention_hours=retention_hours, dry_run=False)
         return {"deleted_files": deleted}
 
+
+
+db = DeltaMiniDB(entity="transactions", schema=transaction_schema)
