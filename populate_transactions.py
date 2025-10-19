@@ -11,10 +11,22 @@ db.create_table_if_not_exists()
 
 tipos = ["entrada", "saída"]
 categorias = ["alimentação", "transporte", "lazer", "educação", "saúde", "moradia"]
+descricoes = [
+    "Compra no supermercado",
+    "Mensalidade academia",
+    "Pagamento de aluguel",
+    "Assinatura de streaming",
+    "Compra de roupas",
+    "Abastecimento do carro",
+    "Consulta médica",
+    "Ingresso de show",
+    "Curso online",
+    "Farmácia"
+]
 
 for _ in range(1000):
     transaction = {
-        "description": fake.sentence(nb_words=5), #frase curta com 5 palavras
+        "description": random.choice(descricoes), #Escolhe aleatoriamente um item da lista
         "amount": round(random.uniform(10, 5000), 2), #Valores entre R$10 e R$5.000, com duas casas decimais
         "date": fake.date_between(start_date="-1y", end_date="today").isoformat(), #do ultimo ano ate hoje
         "type": random.choice(tipos), #verifica o tipo da despesa

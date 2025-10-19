@@ -28,7 +28,6 @@ Atividades técnicas realizadas:
         app/routers/transactions.py
         Pequenas alterações em README.md com instruções de uso da API.
 
-
 Priscila da Silva Holanda - 568069
 Atividades técnicas realizadas:
    - Desenvolveu o script de povoamento com Faker para gerar 1.000 registros e integrar com o MiniDB.
