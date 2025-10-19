@@ -1,6 +1,41 @@
-Kaio Pereira: criação do repositório, 
+Vitoria Rabelo Santiago - 566462
+Atividades técnicas realizadas:
+   - Configuração do ambiente e dependências (venv, requirements.txt, estrutura de pastas e variáveis de ambiente).
+   - Arquivos: requirements.txt, .env (exemplo), instruções no README.md.
+   - Implementação das funções de segurança (JWT) e gerenciamento de senha.
+   - Arquivo: app/security.py (hash de senha, criação/decodificação de token JWT).
+   - Implementação do controle de IDs sequenciais via seq (autoincrement) e integração com o MiniDB.
+   - Pasta/arquivos: app/db/seq.py e gravação em data/seq.
+   - Implementação do Mini Banco de Dados em Delta Lake (DeltaMiniDB): CRUD, paginação, count e vacuum.
+   - Arquivo: app/db/delta_minidb.py (uso de deltalake, pyarrow, write_deltalake, DeltaTable, vacuum).
+   - Testes do vacuum/compactação e verificação dos arquivos em data/delta/transactions.
+   - Arquivos criados/alterados:
+        app/db/delta_minidb.py
+        app/db/seq.py
+        requirements.txt (dependências como deltalake, pyarrow, fastapi, uvicorn, faker, etc.)
 
-Priscila Holanda: 
+Kaio da Silva Pereira - 564892
+Atividades técnicas realizadas:
+   - Inicializou o repositório Git e criou a estrutura inicial do projeto (branchs, .gitignore, README.md).
+   - Implementou os routers e endpoints da API (arquivo: app/routers/transactions.py).
+   - Endpoints CRUD (POST, GET, PUT, DELETE).
+   - Endpoint de paginação (GET /transactions/?page=&size=).
+   - Endpoint de contagem (GET /transactions/utils/count).
+   - Endpoint de download via streaming (GET /transactions/utils/download_csv).
+   - Endpoint de hash (GET /transactions/utils/hash).
+   - Testes manuais dos endpoints via Swagger UI e registro de bugs/enhancements no repositório.
+   - Arquivos criados/alterados:
+        app/routers/transactions.py
+        Pequenas alterações em README.md com instruções de uso da API.
 
-Vitoria Rabelo Santiago - 566462: 
-configurações de ambiente (venv, estrutura do projeto, requirements), segurança JWT, controle de ID's das entidades, 
+
+Priscila da Silva Holanda - 568069
+Atividades técnicas realizadas:
+   - Desenvolveu o script de povoamento com Faker para gerar 1.000 registros e integrar com o MiniDB.
+   - Arquivo: populate_transactions.py (ou populate_transations.py se houver variação de nome).
+   - Testes de integração entre o script de povoamento e a API (inserção e verificação via GET /transactions/utils/count).
+   - Documentação prática para execução local (como criar venv, instalar dependências e rodar o servidor) no README.md.
+   - Preparou a parte prática da apresentação: execução do script de povoamento e verificação dos dados via API.
+   - Arquivos criados/alterados:
+        populate_transactions.py
+        Atualizações em README.md (passo-a-passo para rodar o projeto)
