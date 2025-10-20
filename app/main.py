@@ -1,3 +1,4 @@
+import os
 # app/main.py
 
 from contextlib import asynccontextmanager
@@ -16,6 +17,9 @@ async def lifespan(app: FastAPI):
     yield
     # Código a ser executado APÓS o servidor desligar (se necessário)
     print("Shutting down application...")
+
+# Desabilita a retencao minima de 7 dias do Vaccum
+os.environ["DELTA_VACUUM_RETENTION_CHECK_ENABLED"] = "false"
 
 # Cria a aplicação FastAPI e conecta o lifespan
 app = FastAPI(

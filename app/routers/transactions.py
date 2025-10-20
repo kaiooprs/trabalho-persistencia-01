@@ -19,7 +19,7 @@ router = APIRouter(
 )
 
 # =================================================================
-# F3: CRUD Completo (Create, Read, Update, Delete)
+# CRUD Completo (Create, Read, Update, Delete)
 # =================================================================
 
 # F1: Inserir uma nova transação (CREATE)
@@ -151,3 +151,22 @@ def get_hash(data: str, algorithm: str = "sha256"):
         "algorithm": algorithm.lower(),
         "hashed_value": hasher.hexdigest()
     }
+
+# =================================================================
+# F7: Operação de Limpeza (VACUUM)
+# =================================================================
+@router.post("/utils/vacuum", response_model=dict)
+def vacuum_database(retention_hours: int = 0):
+    """
+    Limpar espaço em disco apagando logs e arquivos parquet.
+    retention_hours=0 significa remoção imediata.
+    """
+    try:
+        result = db.vacuum(retention_hours=retention_hours)
+        return {
+            "status": "success",
+            "deleted_files": result["deleted_files"],
+            "message": f"Vacuum executado com retention_hours={retention_hours}"
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Erro ao executar vacuum: {e}")
