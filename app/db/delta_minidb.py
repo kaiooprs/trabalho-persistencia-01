@@ -107,7 +107,7 @@ class DeltaMiniDB:
 
     # ---------- Vacuum ----------
     def vacuum(self, retention_hours: int = 0) -> Dict[str, Any]:
-        # remove arquivos órfãos; retention_hours=0 para TP
+        # remove arquivos ; retention_hours=0 (marcados pelo delete)
         deleted = self._dt().vacuum(retention_hours=retention_hours, dry_run=False)
         return {"deleted_files": deleted}
 
