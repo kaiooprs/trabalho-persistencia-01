@@ -8,7 +8,8 @@ Atividades técnicas realizadas:
    - Pasta/arquivos: app/db/seq.py e gravação em data/seq.
    - Implementação do Mini Banco de Dados em Delta Lake (DeltaMiniDB): CRUD, paginação, count e vacuum.
    - Arquivo: app/db/delta_minidb.py (uso de deltalake, pyarrow, write_deltalake, DeltaTable, vacuum).
-   - Testes do vacuum/compactação e verificação dos arquivos em data/delta/transactions.
+   - Testes de compactação verificação dos arquivos em data/delta/transactions.
+   - Criação dos Models: account.py, categories.py, transaction.py e user.py
    - Arquivos criados/alterados:
         app/db/delta_minidb.py
         app/db/seq.py

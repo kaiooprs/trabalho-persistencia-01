@@ -1,3 +1,5 @@
+import os
+os.environ["DELTA_VACUUM_RETENTION_CHECK_ENABLED"] = "false"
 # app/routers/transactions.py
 
 import hashlib
@@ -155,18 +157,49 @@ def get_hash(data: str, algorithm: str = "sha256"):
 # =================================================================
 # F7: Operação de Limpeza (VACUUM)
 # =================================================================
+
 @router.post("/utils/vacuum", response_model=dict)
 def vacuum_database(retention_hours: int = 0):
     """
-    Limpar espaço em disco apagando logs e arquivos parquet.
-    retention_hours=0 significa remoção imediata.
+    Executa a operação VACUUM no Delta Lake.
+    - Remove fisicamente arquivos antigos (como um hard delete)
+    - Compacta o banco, recuperando espaço em disco
+    - Melhora o desempenho e mantém a consistência dos dados
+
+    retention_hours=0 → remoção imediata.
     """
+
+   
     try:
+        # Função auxiliar para calcular o tamanho da pasta
+        def get_dir_size(path: str) -> int:
+            total = 0
+            for dirpath, _, filenames in os.walk(path):
+                for f in filenames:
+                    fp = os.path.join(dirpath, f)
+                    if os.path.isfile(fp):
+                        total += os.path.getsize(fp)
+            return total
+
+        # Caminho da tabela Delta
+        table_path = str(db.table_path)
+
+        # Mede o tamanho antes da limpeza
+        before = get_dir_size(table_path)
+
+        # Executa o vacuum do Delta Lake
         result = db.vacuum(retention_hours=retention_hours)
+
+        # Mede o tamanho depois da limpeza
+        after = get_dir_size(table_path)
+        recovered_mb = round((before - after) / (1024 * 1024), 2)
+
         return {
             "status": "success",
-            "deleted_files": result["deleted_files"],
+            "deleted_files": len(result["deleted_files"]),
+            "recovered_space_MB": recovered_mb,
             "message": f"Vacuum executado com retention_hours={retention_hours}"
         }
+
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Erro ao executar vacuum: {e}")
