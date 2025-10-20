@@ -23,8 +23,7 @@ Atividades técnicas realizadas:
    - Endpoint de paginação (GET /transactions/?page=&size=).
    - Endpoint de contagem (GET /transactions/utils/count).
    - Endpoint de download via streaming (GET /transactions/utils/download_csv).
-   - Endpoint de hash (GET /transactions/utils/hash).
-   - Testes manuais dos endpoints via Swagger UI e registro de bugs/enhancements no repositório.
+   - Endpoint de hash (GET /transactions/utils/hash)
    - Arquivos criados/alterados:
         app/routers/transactions.py
         Pequenas alterações em README.md com instruções de uso da API.
@@ -36,6 +35,7 @@ Atividades técnicas realizadas:
    - Testes de integração entre o script de povoamento e a API (inserção e verificação via GET /transactions/utils/count).
    - Documentação prática para execução local (como criar venv, instalar dependências e rodar o servidor) no README.md.
    - Preparou a parte prática da apresentação: execução do script de povoamento e verificação dos dados via API.
+   - Testes manuais dos endpoints via Swagger UI e registro de bugs/enhancements no repositório.
    - Arquivos criados/alterados:
         populate_transactions.py
         Atualizações em README.md (passo-a-passo para rodar o projeto)
